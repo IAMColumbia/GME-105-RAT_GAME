@@ -4,7 +4,11 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
+<<<<<<< Updated upstream
   productGUID: 336d34f8843df9841a8f90b4cb0a025c
+=======
+  productGUID: bae09ec1e51c9c949860f722ba6cfc5f
+>>>>>>> Stashed changes
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +17,11 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
+<<<<<<< Updated upstream
   productName: TRG_Proj_Main
+=======
+  productName: 2D Testing
+>>>>>>> Stashed changes
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -271,9 +279,12 @@ PlayerSettings:
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
+<<<<<<< Updated upstream
   androidAppCategory: 3
   useAndroidAppCategory: 1
   androidAppCategoryOther: 
+=======
+>>>>>>> Stashed changes
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
@@ -599,14 +610,22 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
+<<<<<<< Updated upstream
   metroPackageName: TRG_Proj_Main
+=======
+  metroPackageName: 2D Testing
+>>>>>>> Stashed changes
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
+<<<<<<< Updated upstream
   metroApplicationDescription: TRG_Proj_Main
+=======
+  metroApplicationDescription: 2D Testing
+>>>>>>> Stashed changes
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -677,11 +696,19 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
+<<<<<<< Updated upstream
   cloudProjectId: cdb3e4df-05d3-43d3-9193-4ee873de916f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: TRG_Proj_Main
   organizationId: xc-a11y
+=======
+  cloudProjectId: 
+  framebufferDepthMemorylessMode: 0
+  qualitySettingsNames: []
+  projectName: 
+  organizationId: 
+>>>>>>> Stashed changes
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
