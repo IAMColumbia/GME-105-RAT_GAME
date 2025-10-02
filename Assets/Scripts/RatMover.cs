@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CubeMover : MonoBehaviour
+public class RatMover : MonoBehaviour
 {
 
     public GameObject gameCam;
