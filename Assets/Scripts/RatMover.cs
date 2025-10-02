@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeMover : MonoBehaviour
+public class RatMover : MonoBehaviour
 {
 
     public GameObject gameCam;
@@ -11,9 +13,23 @@ public class CubeMover : MonoBehaviour
 
     public float offsetty = 0.2f;
 
+    public float talkDistance = 0.5f;
+
     private float walkInputHor;
 
     private float walkInputVert;
+
+    private Vector2 currentPos;
+
+    private enum ratDoing
+    {
+        idle,
+        moving,
+        talking,
+        hurting,
+    }
+
+    private ratDoing doingThis = ratDoing.idle;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,10 +40,25 @@ public class CubeMover : MonoBehaviour
     {
         walkInputHor = Input.GetAxisRaw("Horizontal");
         walkInputVert = Input.GetAxisRaw("Vertical");
+
+        currentPos = transform.position;
+
+        if (Input.GetKeyDown("e"))
+        {
+            TalkingTime();
+        }
+
     }
 
     private void FixedUpdate()
     {
+        if (walkInputHor != 0 || walkInputVert != 0)
+        {
+            doingThis = ratDoing.moving;
+        } else
+        {
+            doingThis = ratDoing.idle;
+        }
 
         rb.linearVelocity = new Vector2(walkInputHor, walkInputVert) * speed;
 
@@ -57,5 +88,16 @@ public class CubeMover : MonoBehaviour
             camtrig.flipCameraInc();
         }
         
+    }
+
+    public void TalkingTime()
+    {
+
+        RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, Vector2.left, talkDistance);
+
+        if (talkToYou == true)
+        {
+            Debug.Log(talkToYou.collider.gameObject.name);
+        }
     }
 }
