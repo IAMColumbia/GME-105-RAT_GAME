@@ -19,6 +19,14 @@ public class Rat : MonoBehaviour
 
     Rigidbody2D rb;
 
+    public GameObject gameCam;
+
+    public float offsetty = 0.2f;
+
+    public float talkDistance = 0.5f;
+
+    private Vector2 currentPos;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -37,7 +45,15 @@ public class Rat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currentPos = transform.position;
+
+        if (Input.GetKeyDown("e"))
+        {
+            if (GameObject.Find("UI_Dialogue(Clone)") == false)
+            {
+                TalkingTime();
+            }
+        }
     }
 
     void FixedUpdate()
@@ -55,8 +71,6 @@ public class Rat : MonoBehaviour
 
         }
     }
-
-    
 
     void OnEnable()
     {
@@ -77,6 +91,27 @@ public class Rat : MonoBehaviour
             ItemSprite = other.gameObject;
         } 
         print("Enter");
+
+        Debug.Log("this is the rat trigger.");
+
+        CameraTrigger camtrig = other.GetComponent<CameraTrigger>();
+        CameraMove justdoit = gameCam.GetComponent<CameraMove>();
+
+        if (camtrig != null)
+        {
+            justdoit.MoveCamera(camtrig.cameraIncX, camtrig.cameraIncY);
+
+            BoxCollider2D col = this.GetComponent<BoxCollider2D>();
+            Vector3 offsetTime = col.size;
+            Vector3 myPos = transform.position;
+
+            myPos.x += (offsetTime.x + offsetty) * camtrig.cameraIncX;
+            myPos.y -= (offsetTime.y + offsetty) * camtrig.cameraIncY;
+
+            transform.position = myPos;
+
+            camtrig.flipCameraInc();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -98,5 +133,18 @@ public class Rat : MonoBehaviour
     {
         Item itmScript = ItemSprite.GetComponent<Item>();
         itmScript.PickedUp();
+    }
+
+    public void TalkingTime()
+    {
+
+        RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, Vector2.left, talkDistance);
+
+        if (talkToYou == true)
+        {
+            NPC bitch = talkToYou.collider.gameObject.GetComponent<NPC>();
+
+            bitch.SpeakUp();
+        }
     }
 }
