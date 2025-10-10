@@ -20,9 +20,25 @@ public class ShowThatBox : MonoBehaviour
 
     public void DisplayText(string ourLine)
     {
-        GameObject helpy = Instantiate(UI_Textbox);
+        GameObject helpy = GameObject.Find("UI_Dialogue(Clone)");
+
+
+        if (helpy == null)
+        {
+            helpy = Instantiate(UI_Textbox);
+            
+        }
+
         Text helper = helpy.GetComponentInChildren<Text>();
 
         helper.text = ourLine;
+
+    }
+
+    public void DestroyText()
+    {
+        GameObject helpy = GameObject.Find("UI_Dialogue(Clone)");
+
+        Destroy(helpy);
     }
 }

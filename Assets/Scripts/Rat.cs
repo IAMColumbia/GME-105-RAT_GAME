@@ -27,6 +27,18 @@ public class Rat : MonoBehaviour
 
     private Vector2 currentPos;
 
+    private NPC talkingToYou = null;
+
+    private enum ratDoing
+    {
+        idle,
+        moving,
+        talking,
+        hurting,
+    }
+
+    private ratDoing doingThis = ratDoing.idle;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -49,16 +61,23 @@ public class Rat : MonoBehaviour
 
         if (Input.GetKeyDown("e"))
         {
-            if (GameObject.Find("UI_Dialogue(Clone)") == false)
+            if (GameObject.Find("UI_Dialogue(Clone)") == false && doingThis != ratDoing.talking)
             {
                 TalkingTime();
+                doingThis = ratDoing.talking;
+            } else
+            {
+                TalkMore();
             }
         }
     }
 
     void FixedUpdate()
     {
-        HandleMovement();
+        if ( doingThis != ratDoing.talking)
+        {
+            HandleMovement();
+        }       
     }
 
     void HandleMovement()
@@ -66,9 +85,13 @@ public class Rat : MonoBehaviour
         Vector2 input = move.ReadValue<Vector2>();
         Vector2 direction = (input.x * transform.right) + (transform.up * input.y);
         transform.position += (Vector3)(Time.deltaTime * speed * direction);
-        if (input.x >= 0)
+        if (input.x != 0 || input.y != 0)
         {
-
+            doingThis = ratDoing.moving;
+        }
+        else
+        {
+            doingThis = ratDoing.idle;
         }
     }
 
@@ -138,13 +161,36 @@ public class Rat : MonoBehaviour
     public void TalkingTime()
     {
 
-        RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, Vector2.left, talkDistance);
+        ShowThatBox help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
 
-        if (talkToYou == true)
+        if (talkingToYou == null)
         {
-            NPC bitch = talkToYou.collider.gameObject.GetComponent<NPC>();
+            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, Vector2.left, talkDistance);
 
-            bitch.SpeakUp();
+            talkingToYou = talkToYou.collider.gameObject.GetComponent<NPC>();
         }
+
+        string thisLine = talkingToYou.SpeakUp();
+
+        Debug.Log(thisLine);
+
+        if (thisLine == "")
+        {
+            talkingToYou.LineReset();
+            talkingToYou = null;
+            doingThis = ratDoing.idle;
+            help.DestroyText();
+        }
+        else
+        {
+            help.DisplayText(thisLine);
+        }
+        
+    }
+
+    public void TalkMore()
+    {
+        talkingToYou.NextLine();
+        TalkingTime();
     }
 }
