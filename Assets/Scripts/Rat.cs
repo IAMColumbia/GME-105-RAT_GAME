@@ -21,11 +21,15 @@ public class Rat : MonoBehaviour
 
     public GameObject gameCam;
 
+    public ShowThatBox help;
+
     public float offsetty = 0.2f;
 
     public float talkDistance = 0.5f;
 
     private Vector2 currentPos;
+
+    private Vector2 prevDir;
 
     private NPC talkingToYou = null;
 
@@ -44,6 +48,8 @@ public class Rat : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
+
         playerMappings2D = new();
         move = playerMappings2D.Player.Move;
 
@@ -88,11 +94,15 @@ public class Rat : MonoBehaviour
         if (input.x != 0 || input.y != 0)
         {
             doingThis = ratDoing.moving;
+
+            prevDir = direction;
         }
         else
         {
             doingThis = ratDoing.idle;
         }
+
+        Debug.Log(direction);
     }
 
     void OnEnable()
@@ -118,6 +128,7 @@ public class Rat : MonoBehaviour
         Debug.Log("this is the rat trigger.");
 
         CameraTrigger camtrig = other.GetComponent<CameraTrigger>();
+        WarpTrigger warptrig = other.GetComponent<WarpTrigger>();
         CameraMove justdoit = gameCam.GetComponent<CameraMove>();
 
         if (camtrig != null)
@@ -134,6 +145,18 @@ public class Rat : MonoBehaviour
             transform.position = myPos;
 
             camtrig.flipCameraInc();
+        }
+
+        if (warptrig != null)
+        {
+            justdoit.WarpCamera(warptrig.cameraWarpX, warptrig.cameraWarpY);
+
+            Vector3 myPos = transform.position;
+
+            myPos.x = warptrig.spawnPosX;
+            myPos.y = warptrig.spawnPosY;
+
+            transform.position = myPos;
         }
     }
 
@@ -161,11 +184,9 @@ public class Rat : MonoBehaviour
     public void TalkingTime()
     {
 
-        ShowThatBox help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
-
         if (talkingToYou == null)
         {
-            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, Vector2.left, talkDistance);
+            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, prevDir, talkDistance);
 
             talkingToYou = talkToYou.collider.gameObject.GetComponent<NPC>();
         }
@@ -190,6 +211,8 @@ public class Rat : MonoBehaviour
 
     public void TalkMore()
     {
+
+        //TODO: line changes even if you're just pressing e to make all text of current line appear. Fix.
         talkingToYou.NextLine();
         TalkingTime();
     }

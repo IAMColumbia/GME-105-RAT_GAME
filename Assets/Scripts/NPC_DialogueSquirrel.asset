@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NPC_DialogueSquirrel
   m_EditorClassIdentifier: 
   lines:
-  - Hi
-  - Hello
+  - What are you doing
+  - Where are you going
