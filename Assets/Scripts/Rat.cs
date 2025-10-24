@@ -64,7 +64,6 @@ public class Rat : MonoBehaviour
 
     private Vector2 prevDir;
 
-    public ShowThatBox help;
 
     private PlayerHealth playerHealth;
 
@@ -168,12 +167,7 @@ public class Rat : MonoBehaviour
             doingThis = ratDoing.idle;
 
         }
-        else
-        {
-            doingThis = ratDoing.idle;
-        }
 
-        Debug.Log(direction);
     }
 
     void OnEnable()
@@ -312,36 +306,31 @@ public class Rat : MonoBehaviour
         {
             playerHealth.TakeDamage(1);
 
-        if (talkingToYou == null)
-        {
-            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, prevDir, talkDistance);
+            if (talkingToYou == null)
+            {
+                RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, prevDir, talkDistance);
 
-            talkingToYou = talkToYou.collider.gameObject.GetComponent<NPC>();
+                talkingToYou = talkToYou.collider.gameObject.GetComponent<NPC>();
+            }
+
+            string thisLine = talkingToYou.SpeakUp();
+
+            Debug.Log(thisLine);
+
+            if (thisLine == "")
+            {
+                talkingToYou.LineReset();
+                talkingToYou = null;
+                doingThis = ratDoing.idle;
+                help.DestroyText();
+            }
+            else
+            {
+                help.DisplayText(thisLine);
+            }
+
         }
 
-        string thisLine = talkingToYou.SpeakUp();
-
-        Debug.Log(thisLine);
-
-        if (thisLine == "")
-        {
-            talkingToYou.LineReset();
-            talkingToYou = null;
-            doingThis = ratDoing.idle;
-            help.DestroyText();
-        }
-        else
-        {
-            help.DisplayText(thisLine);
-        }
-        
     }
 
-    public void TalkMore()
-    {
-
-        //TODO: line changes even if you're just pressing e to make all text of current line appear. Fix.
-        talkingToYou.NextLine();
-        TalkingTime();
-    }
 }

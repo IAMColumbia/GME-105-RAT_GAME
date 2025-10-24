@@ -102,10 +102,4 @@ public class ShowThatBox : MonoBehaviour
         Destroy(helpy);
     }
 
-    public void DestroyText()
-    {
-        GameObject helpy = GameObject.Find("UI_Dialogue(Clone)");
-
-        Destroy(helpy);
-    }
 }
