@@ -28,4 +28,11 @@ public class CameraMove : MonoBehaviour
         myPos.y += newY * camMoveY;
         transform.position = myPos;
     }
+
+    public void WarpCamera(float newX, float newY)
+    {
+        myPos.x = newX;
+        myPos.y = newY;
+        transform.position = myPos;
+    }
 }

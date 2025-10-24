@@ -47,6 +47,8 @@ public class Rat : MonoBehaviour
 
     public GameObject gameCam;
 
+    public ShowThatBox help;
+
     public float offsetty = 0.2f;
 
     public float talkDistance = 0.5f;
@@ -84,6 +86,7 @@ public class Rat : MonoBehaviour
         Transform TheRat = transform.Find("The_Rat");
         anim = TheRat.GetComponent<Animator>();
         spriteRenderer = TheRat.GetComponent<SpriteRenderer>();
+        help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
         playerMappings2D = new();
         move = playerMappings2D.Player.Move;
         playerHealth = Object.FindFirstObjectByType<PlayerHealth>();
@@ -103,14 +106,14 @@ public class Rat : MonoBehaviour
 
         if (Input.GetKeyDown("e"))
         {
-            if (GameObject.Find("UI_Dialogue(Clone)") == false)
+            if (GameObject.Find("UI_Dialogue(Clone)") == false && doingThis != ratDoing.talking)
             {
                 TalkingTime();
                 doingThis = ratDoing.talking;
-            }
-            else
-            {
 
+            } else
+            {
+                TalkMore();
             }
         }
     }
@@ -163,7 +166,14 @@ public class Rat : MonoBehaviour
             anim.SetFloat("Horizontal", lastMoveDir.x);
             anim.SetFloat("Vertical", lastMoveDir.y);
             doingThis = ratDoing.idle;
+
         }
+        else
+        {
+            doingThis = ratDoing.idle;
+        }
+
+        Debug.Log(direction);
     }
 
     void OnEnable()
@@ -191,6 +201,7 @@ public class Rat : MonoBehaviour
         Debug.Log("this is the rat trigger.");
 
         CameraTrigger camtrig = other.GetComponent<CameraTrigger>();
+        WarpTrigger warptrig = other.GetComponent<WarpTrigger>();
         CameraMove justdoit = gameCam.GetComponent<CameraMove>();
 
         if (camtrig != null)
@@ -207,6 +218,18 @@ public class Rat : MonoBehaviour
             transform.position = myPos;
 
             camtrig.flipCameraInc();
+        }
+
+        if (warptrig != null)
+        {
+            justdoit.WarpCamera(warptrig.cameraWarpX, warptrig.cameraWarpY);
+
+            Vector3 myPos = transform.position;
+
+            myPos.x = warptrig.spawnPosX;
+            myPos.y = warptrig.spawnPosY;
+
+            transform.position = myPos;
         }
     }
 
@@ -288,6 +311,37 @@ public class Rat : MonoBehaviour
         if (collision.gameObject.tag == ("Foot"))
         {
             playerHealth.TakeDamage(1);
+
+        if (talkingToYou == null)
+        {
+            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, prevDir, talkDistance);
+
+            talkingToYou = talkToYou.collider.gameObject.GetComponent<NPC>();
         }
+
+        string thisLine = talkingToYou.SpeakUp();
+
+        Debug.Log(thisLine);
+
+        if (thisLine == "")
+        {
+            talkingToYou.LineReset();
+            talkingToYou = null;
+            doingThis = ratDoing.idle;
+            help.DestroyText();
+        }
+        else
+        {
+            help.DisplayText(thisLine);
+        }
+        
+    }
+
+    public void TalkMore()
+    {
+
+        //TODO: line changes even if you're just pressing e to make all text of current line appear. Fix.
+        talkingToYou.NextLine();
+        TalkingTime();
     }
 }

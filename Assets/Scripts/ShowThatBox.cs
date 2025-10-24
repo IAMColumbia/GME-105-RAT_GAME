@@ -41,6 +41,7 @@ public class ShowThatBox : MonoBehaviour
 
                 My_Text.text = "";
 
+
                 foreach (char let in trueText)
                 {
 
@@ -75,11 +76,14 @@ public class ShowThatBox : MonoBehaviour
         {
             My_Textbox = Instantiate(UI_Textbox);
 
+
+
         }
 
         if (displayLoop)
         {
             butHowMuch = textToDisplay.Length;
+
         }
         else
         {
@@ -88,6 +92,14 @@ public class ShowThatBox : MonoBehaviour
 
             displayLoop = true;
         }
+
+    }
+
+    public void DestroyText()
+    {
+        GameObject helpy = GameObject.Find("UI_Dialogue(Clone)");
+
+        Destroy(helpy);
     }
 
     public void DestroyText()

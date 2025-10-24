@@ -1,3 +1,5 @@
+using System.IO;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
