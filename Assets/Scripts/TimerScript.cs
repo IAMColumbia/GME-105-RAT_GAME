@@ -56,10 +56,12 @@ public class TimerScript : MonoBehaviour
                 isDay = true;
                 timeRemaining = 0;
                 UpdateText();
+                onDaySwitch.Invoke();
             }
 
-            DisplayTime(timeRemaining);
         }
+
+        DisplayTime(timeRemaining);
     }
 
     // converts time to minute, and second format then displays it.

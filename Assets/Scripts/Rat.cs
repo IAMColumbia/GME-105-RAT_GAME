@@ -2,10 +2,36 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEditor.UIElements;
 using TMPro;
+using UnityEditor;
 
 
 public class Rat : MonoBehaviour
 {
+    /// <summary>
+    ///             speed - how fast the player is moving?
+    ///             ItemSprite - item being held?
+    ///             playerMappings2D - what are the controls for player?
+    ///             rat - what is the sprite for rat?
+    ///             move - move keys?
+    ///             interact - interact key?
+    ///             pickUp - pick up key?
+    ///             rb - where is the rigidbody for player?
+    ///             gameCam - where is the main camera?
+    ///             offsetty - the offset?
+    ///             talkDistance - how far can the player be to talk?
+    ///             currentPos - current possition for player?
+    ///             rbody - where is the rigidbody for player?
+    ///             anim - where is animation controller for player?
+    ///             spriteRenderer - where is sprite renderer for player?
+    ///             lastMoveDir - what was the last move direction of player?
+    ///             talkingToYou - where is the npc talking script?
+    ///             prevDir - what was the previous move direction of player?
+    ///             help - errr the talking box?
+    ///             playerHealth - where is the player health script?
+    /// </summary>
+    
+
+
     [SerializeField] float speed = 5.0f;
     [SerializeField] GameObject ItemSprite;
 
@@ -32,6 +58,12 @@ public class Rat : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 lastMoveDir = Vector2.down;
 
+    private NPC talkingToYou = null;
+
+    private Vector2 prevDir;
+
+    public ShowThatBox help;
+
     private PlayerHealth playerHealth;
 
     private enum ratDoing
@@ -55,6 +87,7 @@ public class Rat : MonoBehaviour
         playerMappings2D = new();
         move = playerMappings2D.Player.Move;
         playerHealth = Object.FindFirstObjectByType<PlayerHealth>();
+        help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
 
         interact = playerMappings2D.Player.Interact;
         interact.performed += Interact;
@@ -114,11 +147,16 @@ public class Rat : MonoBehaviour
                 moveDir.x = 0;
             }
 
-            anim.SetFloat("Horizontal", moveDir.x);
-            anim.SetFloat("Vertical", moveDir.y);
+            anim.SetFloat("Horizontal", lastMoveDir.x);
+            anim.SetFloat("Vertical", lastMoveDir.y);
 
             lastMoveDir = moveDir;
+            prevDir = moveDir;
             doingThis = ratDoing.moving;
+
+            if (lastMoveDir != Vector2.zero)
+                prevDir = lastMoveDir;
+            doingThis = ratDoing.idle;
         }
         else
         {
@@ -138,6 +176,8 @@ public class Rat : MonoBehaviour
         move.Disable();
     }
 
+
+    // triggers camera, and item pick up collision.
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.tag == "Item")
@@ -175,7 +215,7 @@ public class Rat : MonoBehaviour
         if (other.transform.tag == "Item")
         {
             interact.Disable();
-            pickUp.Disable();
+            pickUp.Enable();
         }
         print("Exit");
     }
@@ -187,32 +227,58 @@ public class Rat : MonoBehaviour
 
     void PickUp(InputAction.CallbackContext context)
     {
+        if (ItemSprite == null) return;
+
         Item itmScript = ItemSprite.GetComponent<Item>();
         itmScript.PickedUp();
+        playerHealth.heldItem = itmScript;
     }
+
+    void PickUpItem(Item item)
+    {
+        item.PickedUp();
+        playerHealth.heldItem = item;
+    }
+
+    public LayerMask npcLayerMask;
 
     public void TalkingTime()
     {
-
-        RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, lastMoveDir, talkDistance);
-
-        if (talkToYou && talkToYou.collider.gameObject != gameObject)
+        if (talkingToYou == null)
         {
-            Debug.Log("Hit " + talkToYou.collider.name);
-            NPC bitch = talkToYou.collider.GetComponent<NPC>();
-            if (bitch != null)
-            {
-                bitch.SpeakUp();
-            }
-            else
-            {
-                Debug.LogWarning("Hit object has no NPC component!");
-            }
+            Debug.DrawRay(currentPos, lastMoveDir * talkDistance, Color.green, 0.5f);
+
+            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, lastMoveDir, talkDistance, npcLayerMask);
+
+            Debug.Log($"Ray hit: {talkToYou.collider.name} on layer {talkToYou.collider.gameObject.layer}");
+
+
+
+            talkingToYou = talkToYou.collider.GetComponentInParent<NPC>();
+            if (talkingToYou == null) return;
+        }
+
+        string thisLine = talkingToYou.SpeakUp();
+        Debug.Log(thisLine);
+
+        if (thisLine == "")
+        {
+            talkingToYou.LineReset();
+            talkingToYou = null;
+            doingThis = ratDoing.idle;
+            help.DestroyText();
         }
         else
         {
-            Debug.LogWarning("No object hit by raycast.");
+            help.DisplayText(thisLine);
         }
+    }
+
+
+    public void TalkMore()
+    {
+        talkingToYou.NextLine();
+        TalkingTime();
     }
 
 

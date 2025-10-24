@@ -13,5 +13,10 @@ public class NPC_DialogueList : ScriptableObject
     {
         return lines[num];
     }
-    
+
+    public int GetCount()
+    {
+        return lines.Count;
+    }
+
 }
