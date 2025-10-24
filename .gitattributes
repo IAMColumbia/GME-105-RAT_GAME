@@ -1,38 +1,26 @@
-# Auto-normalize line endings for files detected as text
+# THIS IS ONLY FOR THE gitattributes REPOSITORY.
+# Handle line endings automatically for files detected as text
+# and leave all files detected as binary untouched.
 *               text=auto
 
-# Explicitly mark Unity and code files as text
-*.cs            text
-*.shader        text
-*.cginc         text
-*.hlsl          text
-*.asmdef        text
-*.asmref        text
-*.json          text
-*.xml           text
-*.yaml          text
-*.yml           text
+#
+# The above will handle all files NOT found below
+#
+# These files are text and should be normalized (Convert crlf => lf)
+*.gitattributes text
+.gitignore      text
+*.md            text diff=markdown
 
-# Treat common Unity scene/asset files as text
-*.unity         text
-*.prefab        text
-*.asset         text
-*.mat           text
-*.anim          text
-*.controller    text
+#
+# Exclude files from exporting
+#
 
-# Always union-merge metadata and manifest to avoid conflict markers
-*.meta          merge=union
-Packages/manifest.json merge=union
+.gitattributes  export-ignore
+.gitignore      export-ignore
 
-# Prevent Git from attempting to merge binary assets
-*.png           binary
-*.jpg           binary
-*.jpeg          binary
-*.tga           binary
-*.psd           binary
-*.fbx           binary
-*.wav           binary
-*.ogg           binary
-*.mp4           binary
-*.mov           binary
+#
+# Enable syntax highlighting for files with `.gitattributes` extensions.
+#
+*.gitattributes linguist-language=gitattributes
+*.gitattributes linguist-detectable=true
+*.gitattributes linguist-documentation=false
