@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEditor.UIElements;
@@ -33,11 +35,18 @@ public class Rat : MonoBehaviour
 
 
     [SerializeField] float speed = 5.0f;
-    [SerializeField] GameObject ItemSprite;
+    GameObject ItemSprite;
 
     PlayerControllerMappings playerMappings2D;
 
     Sprite rat;
+
+    [SerializeField] GameObject RatItem;
+    List<GameObject> RatItems = new List<GameObject>();
+    [SerializeField] int ratItems = 0;
+    SpriteRenderer ratItem;
+    float yPos = 0;
+    SpriteRenderer itemSprite;
 
     InputAction move;
     InputAction interact;
@@ -84,6 +93,7 @@ public class Rat : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Transform TheRat = transform.Find("The_Rat");
         anim = TheRat.GetComponent<Animator>();
+        ratItem = RatItem.GetComponent<SpriteRenderer>();
         spriteRenderer = TheRat.GetComponent<SpriteRenderer>();
         help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
         playerMappings2D = new();
@@ -143,6 +153,10 @@ public class Rat : MonoBehaviour
             if (Mathf.Abs(moveDir.x) > Mathf.Abs(moveDir.y))
             {
                 moveDir.y = 0;
+                if (moveDir.y > 0)
+                {
+
+                }
             }
             else
             {
@@ -232,7 +246,7 @@ public class Rat : MonoBehaviour
         if (other.transform.tag == "Item")
         {
             interact.Disable();
-            pickUp.Enable();
+            pickUp.Disable();
         }
         print("Exit");
     }
@@ -246,9 +260,31 @@ public class Rat : MonoBehaviour
     {
         if (ItemSprite == null) return;
 
-        Item itmScript = ItemSprite.GetComponent<Item>();
-        itmScript.PickedUp();
-        playerHealth.heldItem = itmScript;
+        if (ratItems == 0)
+        {
+            ratItems += 1;
+            Item itmScript = ItemSprite.GetComponent<Item>();
+            itmScript.PickedUp();
+            itemSprite = ItemSprite.GetComponent<SpriteRenderer>();
+            ratItem.sprite = itemSprite.sprite;
+            speed -= 0.1f;
+            RatItems.Add(RatItem);
+        }
+        else if (ratItems >= 1)
+        {
+            print(yPos.ToString());
+            yPos += 0.14f;
+            ratItems += 1;
+            Item itmScript = ItemSprite.GetComponent<Item>();
+            itmScript.PickedUp();
+            GameObject NewRatItem = Instantiate(RatItem, this.transform);
+            NewRatItem.transform.localPosition = new Vector3(RatItem.transform.localPosition.x, RatItem.transform.localPosition.y + yPos, RatItem.transform.localPosition.z);
+            SpriteRenderer newRatItem = NewRatItem.GetComponent<SpriteRenderer>();
+            itemSprite = ItemSprite.GetComponent<SpriteRenderer>();
+            newRatItem.sprite = itemSprite.sprite;
+            speed -= 0.1f;
+            RatItems.Add(NewRatItem);
+        }
     }
 
     void PickUpItem(Item item)
