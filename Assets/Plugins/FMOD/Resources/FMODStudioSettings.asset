@@ -388,10 +388,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: Assets/Plugins/FMOD/RatGame-FMOD/RatGame-FMOD.fspro
-  sourceBankPath: Assets/Plugins/FMOD/RatGame-FMOD/Build
+  sourceBankPath: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -413,8 +413,10 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - RatGame
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
