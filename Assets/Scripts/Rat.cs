@@ -39,7 +39,7 @@ public class Rat : MonoBehaviour
 
     PlayerControllerMappings playerMappings2D;
 
-    [SerializeField]GameObject RatWhole;
+    [SerializeField]GameObject Inventory;
     Sprite rat;
 
     [SerializeField] GameObject RatItem;
@@ -69,10 +69,11 @@ public class Rat : MonoBehaviour
     private Animator anim;
     private SpriteRenderer spriteRenderer;
     private Vector2 lastMoveDir = Vector2.down;
-    public Vector3 foodUp = new Vector3(0.013f, 0.095f, -1);
+
+    public Vector3 foodUp = new Vector3(0.013f, 0.095f, 1);
     public Vector3 foodDown = new Vector3(0.005f, -0.024f, 1);
     public Vector3 foodLeft = new Vector3(-0.158f, -0.04f, 1);
-    public Vector3 foodRight = new Vector3(0.158f, -0.04f, 1); 
+    public Vector3 foodRight = new Vector3(0.158f, -0.04f, 1);
 
     private NPC talkingToYou = null;
 
@@ -98,7 +99,7 @@ public class Rat : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Transform TheRat = transform.Find("The_Rat");
         anim = TheRat.GetComponent<Animator>();
-        RatItem.transform.SetParent(RatWhole.transform, false);
+        RatItem.transform.SetParent(Inventory.transform, false);
         //RatItem.transform.localPosition = Vector3.zero;
         ratItem = RatItem.GetComponent<SpriteRenderer>();
         spriteRenderer = TheRat.GetComponent<SpriteRenderer>();
@@ -173,10 +174,22 @@ public class Rat : MonoBehaviour
 
             lastMoveDir = moveDir;
             prevDir = moveDir;
-            if (moveDir == Vector2.up) RatItem.transform.localPosition = foodDown;
-            if (moveDir == Vector2.down) RatItem.transform.localPosition = foodUp;
-            if (moveDir == Vector2.left) RatItem.transform.localPosition = foodRight;
-            if (moveDir == Vector2.right) RatItem.transform.localPosition = foodLeft;
+            if (moveDir == Vector2.up)
+            {
+                Inventory.transform.localPosition = foodDown;
+            }
+            if (moveDir == Vector2.down)
+            {
+                Inventory.transform.localPosition = foodUp;
+            }
+            if (moveDir == Vector2.left)
+            {
+                Inventory.transform.localPosition = foodRight;
+            }
+            if (moveDir == Vector2.right)
+            {
+                Inventory.transform.localPosition = foodLeft;
+            }
             doingThis = ratDoing.moving;
 
             if (lastMoveDir != Vector2.zero)
@@ -286,7 +299,7 @@ public class Rat : MonoBehaviour
             ratItems += 1;
             Item itmScript = ItemSprite.GetComponent<Item>();
             itmScript.PickedUp();
-            GameObject NewRatItem = Instantiate(RatItem, this.transform);
+            GameObject NewRatItem = Instantiate(RatItem, Inventory.transform);
             NewRatItem.transform.localPosition = new Vector3(RatItem.transform.localPosition.x, RatItem.transform.localPosition.y + yPos, RatItem.transform.localPosition.z);
             SpriteRenderer newRatItem = NewRatItem.GetComponent<SpriteRenderer>();
             itemSprite = ItemSprite.GetComponent<SpriteRenderer>();
