@@ -24,7 +24,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 1833188958724444475}
   cacheVersion: 131856
-  cacheTime: 638980398986893323
+  cacheTime: 638980418811644183
   SerializableEventsDict:
   - key: event:/Temp
     index: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop/RatGame.bank
   Name: RatGame
   StudioPath: bank:/RatGame
-  lastModified: 638980398986893323
+  lastModified: 638980418811644183
   FileSizes: []
   Exists: 1
 --- !u!114 &1833188958724444475
@@ -61,7 +61,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638980398986798131
+  lastModified: 638980418811637294
   FileSizes:
   - Name: 
     Value: 816
@@ -81,7 +81,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638980398986773090
+  lastModified: 638980418811630912
   FileSizes: []
   Exists: 1
 --- !u!114 &9044414653261887268

@@ -284,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 129010803}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.486, y: -2.199, z: 0}
+  m_LocalPosition: {x: 4.486, y: -2.199, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -507,7 +507,7 @@ Transform:
   m_GameObject: {fileID: 141245157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.778, y: -1.231, z: 0}
+  m_LocalPosition: {x: 3.778, y: -1.231, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1373,7 +1373,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.667, y: -1.5, z: -1}
+  m_LocalPosition: {x: 2.667, y: -1.5, z: -2}
   m_LocalScale: {x: 0, y: -0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2469,7 +2469,7 @@ Transform:
   m_GameObject: {fileID: 888287405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.405, y: -1.435, z: 0}
+  m_LocalPosition: {x: 4.405, y: -1.435, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2876,7 +2876,7 @@ GameObject:
   - component: {fileID: 1232345876}
   - component: {fileID: 1232345877}
   - component: {fileID: 1232345878}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: The_Squirrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3183,7 +3183,7 @@ Transform:
   m_GameObject: {fileID: 1386126894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.099, y: -1.934, z: 0}
+  m_LocalPosition: {x: 4.099, y: -1.934, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3381,7 +3381,7 @@ GameObject:
   - component: {fileID: 1636964153}
   - component: {fileID: 1636964154}
   - component: {fileID: 1636964155}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: NPC_Squirrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3649,12 +3649,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  RatWhole: {fileID: 1742987655}
   RatItem: {fileID: 1466764859}
   ratItems: 0
   gameCam: {fileID: 519420028}
   help: {fileID: 0}
   offsetty: 0.2
   talkDistance: 1
+  foodUp: {x: 0.013, y: 0.095, z: -1}
+  foodDown: {x: 0.005, y: -0.024, z: 1}
+  foodLeft: {x: -0.158, y: -0.04, z: 1}
+  foodRight: {x: 0.158, y: -0.04, z: 1}
   npcLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -4279,10 +4284,14 @@ PrefabInstance:
     - target: {fileID: 786092313832846404, guid: 8b85e401d9d8a44598b7d3c6d390bc0d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 4078601666105139476, guid: 585e81f29294e4e5ebd1fb826b66a5a0, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 786092313832846404, guid: 8b85e401d9d8a44598b7d3c6d390bc0d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 786092313832846404, guid: 8b85e401d9d8a44598b7d3c6d390bc0d, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6223396161349547420, guid: 8b85e401d9d8a44598b7d3c6d390bc0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4294,7 +4303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6223396161349547420, guid: 8b85e401d9d8a44598b7d3c6d390bc0d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6223396161349547420, guid: 8b85e401d9d8a44598b7d3c6d390bc0d, type: 3}
       propertyPath: m_LocalRotation.w
