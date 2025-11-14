@@ -233,10 +233,10 @@ public class Rat : MonoBehaviour
         move.Enable();
     }
 
-    void OnDisable()
+    /*void OnDisable()
     {
         move.Disable();
-    }
+    }*/
 
 
     // triggers camera, and item pick up collision.
@@ -342,15 +342,13 @@ public class Rat : MonoBehaviour
         //playerHealth.heldItem = item;
     }
 
-    public LayerMask npcLayerMask;
-
     public void TalkingTime()
     {
         if (talkingToYou == null)
         {
             Debug.DrawRay(currentPos, lastMoveDir * talkDistance, Color.green, 0.5f);
 
-            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, lastMoveDir, talkDistance, npcLayerMask);
+            RaycastHit2D talkToYou = Physics2D.Raycast(currentPos, lastMoveDir, talkDistance);
 
             Debug.Log($"Ray hit: {talkToYou.collider.name} on layer {talkToYou.collider.gameObject.layer}");
 

@@ -8,14 +8,4 @@ public class ResetLevel : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-    public void GameScene()
-    {
-        SceneManager.LoadScene("LevelDemo");
-    }
-
-    public void CharacterScene()
-    {
-        SceneManager.LoadScene("CharacterSelection");
-    }
 }

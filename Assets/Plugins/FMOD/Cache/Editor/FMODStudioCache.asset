@@ -12,102 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: 1833188958724444475}
-  - {fileID: 2861637991297932404}
-  - {fileID: 1814094756527582321}
-  EditorEvents:
-  - {fileID: 9044414653261887268}
+  EditorBanks: []
+  EditorEvents: []
   EditorParameters: []
-  MasterBanks:
-  - {fileID: 2861637991297932404}
-  StringsBanks:
-  - {fileID: 1833188958724444475}
+  MasterBanks: []
+  StringsBanks: []
   cacheVersion: 131856
-  cacheTime: 638980418811644183
-  SerializableEventsDict:
-  - key: event:/Temp
-    index: 0
---- !u!114 &1814094756527582321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/RatGame.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop/RatGame.bank
-  Name: RatGame
-  StudioPath: bank:/RatGame
-  lastModified: 638980418811644183
-  FileSizes: []
-  Exists: 1
---- !u!114 &1833188958724444475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638980418811637294
-  FileSizes:
-  - Name: 
-    Value: 816
-  Exists: 1
---- !u!114 &2861637991297932404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/RatGame-FMOD/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638980418811630912
-  FileSizes: []
-  Exists: 1
---- !u!114 &9044414653261887268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Temp
-  m_EditorClassIdentifier: 
-  Path: event:/Temp
-  Guid:
-    Data1: -1836471464
-    Data2: 1265671667
-    Data3: 2080512384
-    Data4: 1561972908
-  Banks:
-  - {fileID: 1814094756527582321}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  cacheTime: 0
+  SerializableEventsDict: []
