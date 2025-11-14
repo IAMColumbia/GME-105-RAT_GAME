@@ -39,7 +39,8 @@ public class Rat : MonoBehaviour
 
     PlayerControllerMappings playerMappings2D;
 
-    [SerializeField]GameObject Inventory;
+    [SerializeField] GameObject Inventory;
+    SpriteRenderer inventoryLayer;
     Sprite rat;
 
     [SerializeField] GameObject RatItem;
@@ -70,8 +71,8 @@ public class Rat : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 lastMoveDir = Vector2.down;
 
-    public Vector3 foodUp = new Vector3(0.013f, 0.095f, 1);
-    public Vector3 foodDown = new Vector3(0.005f, -0.024f, 1);
+    public Vector3 foodUp = new Vector3(0.013f, 0.095f, -1);
+    public Vector3 foodDown = new Vector3(0.005f, -0.024f, -1);
     public Vector3 foodLeft = new Vector3(-0.158f, -0.04f, 1);
     public Vector3 foodRight = new Vector3(0.158f, -0.04f, 1);
 
@@ -102,6 +103,7 @@ public class Rat : MonoBehaviour
         RatItem.transform.SetParent(Inventory.transform, false);
         //RatItem.transform.localPosition = Vector3.zero;
         ratItem = RatItem.GetComponent<SpriteRenderer>();
+        inventoryLayer = Inventory.GetComponent<SpriteRenderer>();
         spriteRenderer = TheRat.GetComponent<SpriteRenderer>();
         help = GameObject.Find("Main Camera").GetComponent<ShowThatBox>();
         playerMappings2D = new();
@@ -177,18 +179,38 @@ public class Rat : MonoBehaviour
             if (moveDir == Vector2.up)
             {
                 Inventory.transform.localPosition = foodDown;
+                foreach(GameObject item in RatItems)
+                {
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                } 
+                //inventoryLayer.sortingOrder = 2; 
             }
             if (moveDir == Vector2.down)
             {
                 Inventory.transform.localPosition = foodUp;
+                foreach (GameObject item in RatItems)
+                {
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                }
+                //inventoryLayer.sortingOrder = 1;
             }
             if (moveDir == Vector2.left)
             {
                 Inventory.transform.localPosition = foodRight;
+                foreach (GameObject item in RatItems)
+                {
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                }
+                //inventoryLayer.sortingOrder = 1;
             }
             if (moveDir == Vector2.right)
             {
                 Inventory.transform.localPosition = foodLeft;
+                foreach (GameObject item in RatItems)
+                {
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                }
+                //inventoryLayer.sortingOrder = 1;
             }
             doingThis = ratDoing.moving;
 
@@ -317,7 +339,7 @@ public class Rat : MonoBehaviour
     void PickUpItem(Item item)
     {
         item.PickedUp();
-        playerHealth.heldItem = item;
+        //playerHealth.heldItem = item;
     }
 
     public LayerMask npcLayerMask;
