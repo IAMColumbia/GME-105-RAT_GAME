@@ -173,7 +173,7 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pick Up"",
+                    ""name"": ""Pick Up/Drop"",
                     ""type"": ""Button"",
                     ""id"": ""61536d34-8b13-4c39-aa98-b8671c9da709"",
                     ""expectedControlType"": """",
@@ -575,7 +575,7 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Pick Up"",
+                    ""action"": ""Pick Up/Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -586,7 +586,7 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Pick Up"",
+                    ""action"": ""Pick Up/Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1183,7 +1183,7 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
         m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        m_Player_PickUp = m_Player.FindAction("Pick Up", throwIfNotFound: true);
+        m_Player_PickUpDrop = m_Player.FindAction("Pick Up/Drop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1286,7 +1286,7 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
     private readonly InputAction m_Player_Previous;
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
-    private readonly InputAction m_Player_PickUp;
+    private readonly InputAction m_Player_PickUpDrop;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1335,9 +1335,9 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         /// <summary>
-        /// Provides access to the underlying input action "Player/PickUp".
+        /// Provides access to the underlying input action "Player/PickUpDrop".
         /// </summary>
-        public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
+        public InputAction @PickUpDrop => m_Wrapper.m_Player_PickUpDrop;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1391,9 +1391,9 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @PickUp.started += instance.OnPickUp;
-            @PickUp.performed += instance.OnPickUp;
-            @PickUp.canceled += instance.OnPickUp;
+            @PickUpDrop.started += instance.OnPickUpDrop;
+            @PickUpDrop.performed += instance.OnPickUpDrop;
+            @PickUpDrop.canceled += instance.OnPickUpDrop;
         }
 
         /// <summary>
@@ -1432,9 +1432,9 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @PickUp.started -= instance.OnPickUp;
-            @PickUp.performed -= instance.OnPickUp;
-            @PickUp.canceled -= instance.OnPickUp;
+            @PickUpDrop.started -= instance.OnPickUpDrop;
+            @PickUpDrop.performed -= instance.OnPickUpDrop;
+            @PickUpDrop.canceled -= instance.OnPickUpDrop;
         }
 
         /// <summary>
@@ -1799,12 +1799,12 @@ public partial class @PlayerControllerMappings: IInputActionCollection2, IDispos
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Pick Up" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Pick Up/Drop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPickUp(InputAction.CallbackContext context);
+        void OnPickUpDrop(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

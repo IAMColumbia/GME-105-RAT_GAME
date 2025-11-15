@@ -88,7 +88,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pick Up",
+                    "name": "Pick Up/Drop",
                     "type": "Button",
                     "id": "61536d34-8b13-4c39-aa98-b8671c9da709",
                     "expectedControlType": "",
@@ -490,7 +490,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Pick Up",
+                    "action": "Pick Up/Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -501,7 +501,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Pick Up",
+                    "action": "Pick Up/Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
