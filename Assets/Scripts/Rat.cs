@@ -114,7 +114,7 @@ public class Rat : MonoBehaviour
         interact = playerMappings2D.Player.Interact;
         interact.performed += Interact;
 
-        pickUp = playerMappings2D.Player.PickUp;
+        pickUp = playerMappings2D.Player.PickUpDrop;
         pickUp.performed += PickUp;
     }
 
@@ -171,8 +171,8 @@ public class Rat : MonoBehaviour
               
             }
 
-            anim.SetFloat("Horizontal", lastMoveDir.x);
-            anim.SetFloat("Vertical", lastMoveDir.y);
+            anim.SetFloat("Horizontal", moveDir.x);
+            anim.SetFloat("Vertical", moveDir.y);
 
             lastMoveDir = moveDir;
             prevDir = moveDir;

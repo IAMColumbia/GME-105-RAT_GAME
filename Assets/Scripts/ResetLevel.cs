@@ -8,4 +8,9 @@ public class ResetLevel : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void GameScene()
+    {
+        SceneManager.LoadScene("level_one_testings_ver1");
+    }
 }
