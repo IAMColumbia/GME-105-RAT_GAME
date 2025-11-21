@@ -96,6 +96,7 @@ MonoBehaviour:
   moveSpeed: 5
   lifetime: 2
   healthPoint: 2
+  pauseTime: 1
 --- !u!50 &329044665849440260
 Rigidbody2D:
   serializedVersion: 5
@@ -131,6 +132,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5122949365613508602}
     m_Modifications:
+    - target: {fileID: 615809180383860413, guid: 5f4ec0ed75820f541841b22ab14b1c2e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4671251889836137966, guid: 5f4ec0ed75820f541841b22ab14b1c2e, type: 3}
       propertyPath: m_Name
       value: tile32_base
