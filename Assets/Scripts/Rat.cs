@@ -50,9 +50,14 @@ public class Rat : MonoBehaviour
     float yPos = 0;
     SpriteRenderer itemSprite;
 
+    [SerializeField] GameObject DropOff;
+    [SerializeField] GameObject DroppedOffItem;
+    List<GameObject> DroppedOffItems = new List<GameObject>();
+
     InputAction move;
     InputAction interact;
     InputAction pickUp;
+    InputAction drop;
 
     Rigidbody2D rb;
 
@@ -114,8 +119,11 @@ public class Rat : MonoBehaviour
         interact = playerMappings2D.Player.Interact;
         interact.performed += Interact;
 
-        pickUp = playerMappings2D.Player.PickUpDrop;
+        pickUp = playerMappings2D.Player.PickUp;
         pickUp.performed += PickUp;
+
+        drop = playerMappings2D.Player.Drop;
+        drop.performed += Drop;
     }
 
     // Update is called once per frame
@@ -233,10 +241,10 @@ public class Rat : MonoBehaviour
         move.Enable();
     }
 
-    /*void OnDisable()
+    void OnDisable()
     {
         move.Disable();
-    }*/
+    }
 
 
     // triggers camera, and item pick up collision.
@@ -248,6 +256,11 @@ public class Rat : MonoBehaviour
             pickUp.Enable();
             ItemSprite = other.gameObject;
         }
+        else if (other.transform.tag == "DropOff")
+        {
+            drop.Enable();
+        }
+
         print("Enter");
 
         Debug.Log("this is the rat trigger.");
@@ -292,6 +305,10 @@ public class Rat : MonoBehaviour
             interact.Disable();
             pickUp.Disable();
         }
+        else if (other.transform.tag == "DropOff")
+        {
+            drop.Disable();
+        }
         print("Exit");
     }
 
@@ -328,6 +345,20 @@ public class Rat : MonoBehaviour
             newRatItem.sprite = itemSprite.sprite;
             speed -= 0.1f;
             RatItems.Add(NewRatItem);
+        }
+    }
+
+    void Drop(InputAction.CallbackContext context)
+    {   
+        foreach(GameObject RI in RatItems)
+        {
+            RatItems.Remove(RI);
+            GameObject DOI = Instantiate(DroppedOffItem, DropOff.transform);
+            DOI.transform.localPosition = new Vector3(0, 0, 0);
+            SpriteRenderer doi = DOI.GetComponent<SpriteRenderer>();
+            SpriteRenderer ri = RI.GetComponent<SpriteRenderer>();
+            doi.sprite = ri.sprite;
+            DroppedOffItems.Add(DOI);
         }
     }
 
