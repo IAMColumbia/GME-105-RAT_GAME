@@ -187,10 +187,11 @@ public class Rat : MonoBehaviour
             if (moveDir == Vector2.up)
             {
                 Inventory.transform.localPosition = foodDown;
-                foreach(GameObject item in RatItems)
+                foreach (GameObject item in RatItems)
                 {
-                    item.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                } 
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 35;
+                }
+                print("35");
                 //inventoryLayer.sortingOrder = 2; 
             }
             if (moveDir == Vector2.down)
@@ -198,7 +199,7 @@ public class Rat : MonoBehaviour
                 Inventory.transform.localPosition = foodUp;
                 foreach (GameObject item in RatItems)
                 {
-                    item.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 20;
                 }
                 //inventoryLayer.sortingOrder = 1;
             }
@@ -207,7 +208,7 @@ public class Rat : MonoBehaviour
                 Inventory.transform.localPosition = foodRight;
                 foreach (GameObject item in RatItems)
                 {
-                    item.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 20;
                 }
                 //inventoryLayer.sortingOrder = 1;
             }
@@ -216,7 +217,7 @@ public class Rat : MonoBehaviour
                 Inventory.transform.localPosition = foodLeft;
                 foreach (GameObject item in RatItems)
                 {
-                    item.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    item.GetComponent<SpriteRenderer>().sortingOrder = 20;
                 }
                 //inventoryLayer.sortingOrder = 1;
             }
@@ -326,10 +327,13 @@ public class Rat : MonoBehaviour
             ratItems += 1;
             Item itmScript = ItemSprite.GetComponent<Item>();
             itmScript.PickedUp();
+            GameObject NewRatItem = Instantiate(RatItem, Inventory.transform);
+            NewRatItem.transform.localPosition = Vector3.zero;
+            SpriteRenderer newRatItem = NewRatItem.GetComponent<SpriteRenderer>();
             itemSprite = ItemSprite.GetComponent<SpriteRenderer>();
-            ratItem.sprite = itemSprite.sprite;
+            newRatItem.sprite = itemSprite.sprite;
             speed -= 0.1f;
-            RatItems.Add(RatItem);
+            RatItems.Add(NewRatItem);
         }
         else if (ratItems >= 1)
         {
@@ -358,7 +362,10 @@ public class Rat : MonoBehaviour
             SpriteRenderer doi = DOI.GetComponent<SpriteRenderer>();
             SpriteRenderer ri = RI.GetComponent<SpriteRenderer>();
             doi.sprite = ri.sprite;
+            ri.sprite = null;
+            Destroy(RI);
             DroppedOffItems.Add(DOI);
+            print($"{DroppedOffItems}");
         }
     }
 
