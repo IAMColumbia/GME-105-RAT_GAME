@@ -353,19 +353,23 @@ public class Rat : MonoBehaviour
     }
 
     void Drop(InputAction.CallbackContext context)
-    {   
-        foreach(GameObject RI in RatItems)
+    {
+        while (RatItems.Count != 0)
         {
-            RatItems.Remove(RI);
-            GameObject DOI = Instantiate(DroppedOffItem, DropOff.transform);
-            DOI.transform.localPosition = new Vector3(0, 0, 0);
-            SpriteRenderer doi = DOI.GetComponent<SpriteRenderer>();
-            SpriteRenderer ri = RI.GetComponent<SpriteRenderer>();
-            doi.sprite = ri.sprite;
-            ri.sprite = null;
-            Destroy(RI);
-            DroppedOffItems.Add(DOI);
-            print($"{DroppedOffItems}");
+            foreach (GameObject RI in RatItems)
+            {
+                RatItems.Remove(RI);
+                GameObject DOI = Instantiate(DroppedOffItem);
+                DOI.transform.localPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+                SpriteRenderer doi = DOI.GetComponent<SpriteRenderer>();
+                doi.sortingOrder = 2;
+                SpriteRenderer ri = RI.GetComponent<SpriteRenderer>();
+                doi.sprite = ri.sprite;
+                ri.sprite = null;
+                Destroy(RI);
+                DroppedOffItems.Add(DOI);
+                print($"{DroppedOffItems}");
+            }
         }
     }
 
