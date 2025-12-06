@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12da92b670a7fec4bb1bbb445de8f3a3, type: 3}
   m_Name: NPC_DialogueSquirrel
   m_EditorClassIdentifier: 
-  lines:
-  - What are you doing
-  - Where are you going
+  entries:
+  - line: Yo, Did you get me some food?
+    methodScript: {fileID: 0}
+    methodName: 
+  - line: Thanks!
+    methodScript: {fileID: 0}
+    methodName: 

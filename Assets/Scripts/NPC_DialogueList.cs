@@ -7,16 +7,24 @@ using System.Collections;
 public class NPC_DialogueList : ScriptableObject
 {
 
-    public List<string> lines = new List<string>();
+    [System.Serializable]
+    public class DialogueEntry
+    {
+        public string line;
+        public MonoBehaviour methodScript;
+        public string methodName;
+    }
+
+    public List<DialogueEntry> entries = new List<DialogueEntry>();
 
     public string GetLine(int num)
     {
-        return lines[num];
+        return entries[num].line;
     }
 
     public int GetCount()
     {
-        return lines.Count;
+        return entries.Count;
     }
 
 }
