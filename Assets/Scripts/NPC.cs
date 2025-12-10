@@ -5,6 +5,8 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 
+    public NPC_DialogueList myDialogue;
+
     private int _lineNum = 0;
 
     public int lineNum
@@ -13,18 +15,6 @@ public class NPC : MonoBehaviour
         set { _lineNum = value; }
     }
 
-    public NPC_DialogueList myDialogue;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public string SpeakUp()
     {
