@@ -2679,15 +2679,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Health Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a9eb4de3a9ce794e8c4fa7eaa2896c6, type: 2}
+  m_sharedMaterial: {fileID: -893392114213194879, guid: 4a9eb4de3a9ce794e8c4fa7eaa2896c6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4286412548
+  m_fontColor: {r: 0.01388386, g: 0.46699435, b: 0.49056602, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3967,6 +3967,10 @@ PrefabInstance:
       value: Timer
       objectReference: {fileID: 0}
     - target: {fileID: 5960507864403929182, guid: 8c7134affd2534849834ba23f16767bc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 51.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960507864403929182, guid: 8c7134affd2534849834ba23f16767bc, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5080941
       objectReference: {fileID: 0}
@@ -3984,7 +3988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5960507864403929182, guid: 8c7134affd2534849834ba23f16767bc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 457
+      value: 458.4
       objectReference: {fileID: 0}
     - target: {fileID: 8132155428962220688, guid: 8c7134affd2534849834ba23f16767bc, type: 3}
       propertyPath: onDaySwitch.m_PersistentCalls.m_Calls.Array.size
